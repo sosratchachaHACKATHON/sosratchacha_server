@@ -2,17 +2,18 @@ const {response, errResponse} = require('../../../../config/response')
 const UserDao = require('./UserDao');
 const baseResponse = require('../../../../config/baseresponseStatus')
 const pool = require('../../../../config/dbConnection')
-const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 require("dotenv").config();
 
 exports.createUser = async function(name, email, nickname, password){
     try{
         const connection = await pool.getConnection(async (conn) => conn);
-        const hashed = bcrypt.hashSync(password, 10);
-        //console.log(`password: ${password}, hashed: ${hashed}`);
+        const hashed = await crypto
+        .createHash("sha512", process.env.AES_128_KEY)
+        .update(password)
+        .digest("hex");
             
         const result = await UserDao.createUser(connection, name, email, nickname, hashed);
-        console.log(result);
         connection.release();
         return response(baseResponse.SUCCESS);
     }catch(error){
@@ -25,11 +26,15 @@ exports.createUser = async function(name, email, nickname, password){
 exports.loginUser = async function(email,password){
     try{
         const connection = await pool.getConnection(async (conn) => conn);
-        const hashed = bcrypt.hashSync(password, 10);
+        const hashed =  await crypto
+        .createHash("sha512", process.env.AES_128_KEY)
+        .update(password)
+        .digest("hex");
+
         const result = await UserDao.loginUser(connection,email,hashed);
-        console.log(result);
         connection.release();
-        return response(baseResponse.SUCCESS);
+        if(result != null) return response(baseResponse.SUCCESS);
+        else return errResponse(baseResponse.SIGNIN_FAIL)
     }catch(error){
         console.log(error)
         return errResponse(baseResponse.DB_ERROR);

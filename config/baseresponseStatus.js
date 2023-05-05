@@ -9,6 +9,10 @@ module.exports = {
     NULL_UESR_PASSWORD : {"isSuccess": false, "code": 4002, "message":"비밀번호를 입력해주세요."},
     NULL_UESR_NICKNAME : {"isSuccess": false, "code": 4003, "message":"닉네임을 입력해주세요."},
     NULL_USER_NAME : {"isSuccess": false, "code": 4004, "message":"이름을 입력해주세요."},
+    TOKEN_EMPTY: {"isSuccess": false, "code": 4005, "message":"토큰을 입력해주세요."},
+    TOKEN_VERIFICATION_FAILURE: {"isSuccess": false, "code": 4006, "message":"토큰 검증 실패"},
+
+    SIGNIN_FAIL: {"isSuccess": false, "code": 4007, "message":"로그인 실패"},
    //500번대 에러 - 서버 오류
     DB_ERROR : {"isSuccess": false, "code": 5000, "message":"데이터베이스 오류입니다."}
 }
