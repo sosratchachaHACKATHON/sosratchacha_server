@@ -1,17 +1,14 @@
-const express = require('express');
-const http = require('http');
+// node_modules의 express 패키지를 가져온다.
+var express = require('./config/express');
+const path = require('path');
+var expressForStatic = require("express");
 
-app = express()
-server = http.createServer(app);
+//app이라는 변수에 express 함수의 변환 값을 저장한다.
+var app = express();
+const port = app.listen(8000);
+// express 서버를 실행할 때 필요한 포트 정의 및 실행 시 callback 함수를 받습니다
+app.listen(port, function() {
+    console.log(`start!express server on port 8000`);
+})
 
-app.get('/', function (req, res) {
-  res.send('Hello /');
-});
-
-app.get('/world.html', function (req, res) {
-  res.send('Hello World');
-});
-
-server.listen(8000, function () {
-  console.log('Express server listening on port ' + server.address().port);
-});
+module.exports = app;
