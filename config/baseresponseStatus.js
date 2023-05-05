@@ -13,6 +13,15 @@ module.exports = {
     TOKEN_VERIFICATION_FAILURE: {"isSuccess": false, "code": 4006, "message":"토큰 검증 실패"},
 
     SIGNIN_FAIL: {"isSuccess": false, "code": 4007, "message":"로그인 실패"},
+
+    XCOORDI_EMPTY: {"isSuccess": false, "code": 4008, "message":"x좌표를 입력해주세요."},
+    YCOORDI_EMPTY: {"isSuccess": false, "code": 4009, "message":"y좌표를 입력해주세요."},
+    WHERE_EMPTY: {"isSuccess": false, "code": 4010, "message":"장소를 입력해주세요."},
+    TYPE_EMPTY: {"isSuccess": false, "code": 4011, "message":"타입을 입력해주세요."},
+    CONTENT_EMPTY: {"isSuccess": false, "code": 4012, "message":"내용을 입력해주세요."},
+    BOARDTYPE_EMPTY: {"isSuccess": false, "code": 4013, "message":"게시판 타입을 입력해주세요."},
+    FILE_EMPTY: {"isSuccess": false, "code": 4014, "message":"파일을 입력해주세요."},
+    
    //500번대 에러 - 서버 오류
     DB_ERROR : {"isSuccess": false, "code": 5000, "message":"데이터베이스 오류입니다."}
 }
