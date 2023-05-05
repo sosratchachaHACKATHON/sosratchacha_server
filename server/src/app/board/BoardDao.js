@@ -18,10 +18,10 @@ async function selectBoard(connection, userInfo, boardType){
         SELECT B.id, B.xCoord, B.yCoord, B.locationName, B.type, B.content, B.boardType, PU.url
         FROM Board B
         INNER JOIN PicURL PU on B.id = PU.boardID
-        WHERE Boardtype = 'throw'
+        WHERE Boardtype = ?
     `
 
-    const response = await connection.query(query, [userInfo.id, boardType]);
+    const response = await connection.query(query, boardType);
 
     return response[0];
 }
