@@ -2,6 +2,7 @@ const {response, errResponse} = require('../../../../config/response')
 const UserResponse = require('../../../../config/baseresponseStatus')
 const UserService = require('./UserService');
 
+
 exports.createUser = async function(req, res){
     // 1. Body에서 받아오기
     // TODO : 이름도 넣기
@@ -16,10 +17,23 @@ exports.createUser = async function(req, res){
     if(password == null){
         return res.send(errResponse(UserResponse.NULL_UESR_PASSWORD));
     }
+    
     if(nickname == null){
         return res.send(errResponse(UserResponse.NULL_UESR_NICKNAME));
     }
 
     const signUpResponse = await UserService.createUser(name, email, nickname, password);
     return res.send(signUpResponse)
+}
+
+exports.loginUser = async function(req, res){
+    const {email, password} = req.body;
+    if(email == null){
+        return res.send(errResponse(UserResponse.NULL_UESR_EMAIL));
+    }
+    if(password == null){
+        return res.send(errResponse(UserResponse.NULL_UESR_PASSWORD));
+    }
+    const loginResponse = await UserService.loginUser(email,password);
+    return res.send(loginResponse)
 }
