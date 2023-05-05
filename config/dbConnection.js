@@ -1,7 +1,8 @@
 const mysql = require('mysql2/promise');
 require("dotenv").config();
 
-const pool = mysql.createPool({  // 커넥션 풀 생성
+const pool = mysql.createPool({  
+    // 커넥션 풀 생성
     host: process.env.DB_HOST,
     user: process.env.DB_ID,
     port: process.env.DB_PORT,

@@ -1,8 +1,12 @@
-async function createUser(connection, email, name, password, nickname){
+async function createUser(connection, name, email, nickname, password){
     const query = `
-        INSERT INTO User (email, name, password, nickname)
-        VALUES (?, ?, ?);
+        INSERT INTO user(name, email, nickname, password)  VALUES (?, ?, ?, ?)
     `;
-    const row = await connection.query(query, [email, name, password, nickname]);
+    const row = await connection.query(query, [name, email, nickname, password]);
+    console.log(row)
     return row[0];
+}
+
+module.exports = {
+    createUser
 }

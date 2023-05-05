@@ -5,7 +5,7 @@ const UserService = require('./UserService');
 exports.createUser = async function(req, res){
     // 1. Body에서 받아오기
     // TODO : 이름도 넣기
-    const {email, name, password, nickname} = req.body;
+    const {name, email, nickname, password} = req.body;
 
     if(email == null){
         return res.send(errResponse(UserResponse.NULL_UESR_EMAIL));
@@ -20,6 +20,6 @@ exports.createUser = async function(req, res){
         return res.send(errResponse(UserResponse.NULL_UESR_NICKNAME));
     }
 
-    const signUpResponse = await UserService.createUser(email, password, nickname);
+    const signUpResponse = await UserService.createUser(name, email, nickname, password);
     return res.send(signUpResponse)
 }
