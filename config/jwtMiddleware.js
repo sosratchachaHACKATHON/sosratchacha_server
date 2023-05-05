@@ -14,7 +14,7 @@ async function jwtMiddleware(req, res, next){
     // create a promise that decodes the token
     const p = new Promise(
         (resolve, reject) => {
-            jwt.verify(token, secret_config.ACCESSjwtsecret , (err, verifiedToken) => {
+            jwt.verify(token, process.env.JSONKEY , (err, verifiedToken) => {
                 if(err) reject(err);
                 resolve(verifiedToken)
             })
@@ -45,7 +45,7 @@ async function jwtRefreshChecker(req, res, next){
     // create a promise that decodes the token
     const p = new Promise(
         (resolve, reject) => {
-            jwt.verify(token, secret_config.REFRESHjwtsecret , (err, verifiedToken) => {
+            jwt.verify(token, process.env.JSONKEY , (err, verifiedToken) => {
                 if(err) reject(err);
                 resolve(verifiedToken)
             })

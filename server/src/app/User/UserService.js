@@ -21,7 +21,6 @@ exports.createUser = async function(name, email, nickname, password){
         console.log(error)
         return errResponse(baseResponse.DB_ERROR);
     }
-    
 }
 
 exports.loginUser = async function(email,password){
@@ -42,7 +41,7 @@ exports.loginUser = async function(email,password){
                   nickname: result.nickname,
                   email: result.email
                 }, // 토큰의 내용(payload)
-                process.env.AES_128_KEY, // 비밀키
+                process.env.JSONKEY, // 비밀키
                 {
                   expiresIn: "3h",
                   subject: "userInfo",
@@ -55,6 +54,5 @@ exports.loginUser = async function(email,password){
         console.log(error)
         return errResponse(baseResponse.DB_ERROR);
     }
-    
 }
 

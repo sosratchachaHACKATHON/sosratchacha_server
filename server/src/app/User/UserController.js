@@ -37,3 +37,7 @@ exports.loginUser = async function(req, res){
     const loginResponse = await UserService.loginUser(email,password);
     return res.send(loginResponse)
 }
+
+exports.check = async function(req, res){
+    return res.send(response(UserResponse.SUCCESS, req.verifiedToken));
+}
