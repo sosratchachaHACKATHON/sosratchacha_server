@@ -31,3 +31,13 @@ exports.createBoard = async function(req, res){
     const createBoardResponse = await BoardService.createBoard(xCoordi, yCoordi, where, type, content, boardType, fileName);
     return res.send(createBoardResponse)
 }
+
+exports.getBoard = async function(req, res){
+    const userInfo = req.verifiedToken;
+    const {boardType} = req.query;
+    if(!boardType){
+        return res.send(errResponse(baseResponse.BOARDTYPE_EMPTY))
+    }
+    const getBoardResponse = await BoardService.getBoard(userInfo, boardType);
+    return res.send(getBoardResponse)
+}

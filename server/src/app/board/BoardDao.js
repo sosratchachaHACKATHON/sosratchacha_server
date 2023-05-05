@@ -13,6 +13,20 @@ async function insertBoard(connection, xCoordi, yCoordi, where, type, content, b
     return [response[0].insertId, picResponse[0].insertId];
 }
 
+async function selectBoard(connection, userInfo, boardType){
+    const query = `
+        SELECT B.id, B.xCoord, B.yCoord, B.locationName, B.type, B.content, B.boardType, PU.url
+        FROM Board B
+        INNER JOIN PicURL PU on B.id = PU.boardID
+        WHERE Boardtype = 'throw'
+    `
+
+    const response = await connection.query(query, [userInfo.id, boardType]);
+
+    return response[0];
+}
+
 module.exports = {
-    insertBoard
+    insertBoard,
+    selectBoard
 }
