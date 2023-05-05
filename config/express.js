@@ -19,6 +19,7 @@ module.exports = function () {
     //domain 추가
     require('../server/src/app/Base/BaseRoute/BaseRoute')(app);
     require('../server/src/app/User/UserRoute')(app);
+    require('../server/src/app/Board/BoardRoute')(app);
 
     return app;
 };
