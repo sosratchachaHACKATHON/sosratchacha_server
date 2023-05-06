@@ -5,7 +5,7 @@ const path = require('path');
 const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
 const botName = 'ChatCord BOT';
-
+var pathComp= require("express-static");
 const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('./server/src/app/User/UserDao');
 
 var app = express();
@@ -43,7 +43,7 @@ io.on('connection',socket =>{
         });        
 });
 });
-var pathComp= require("express-static");
-app.use(pathComp(__dirname+"/public"));
+
+app.use(pathComp(__dirname+"/global"));
 const PORT = 8000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
