@@ -18,5 +18,5 @@ exports.getChatting = async function(req, res){
     const userInfo = req.verifiedToken;
 
     const result = await chattingService.getChatting(userInfo.id, userInfo.nickname);
-    return res.send(response(baseResponse.SUCCESS, result));
+    return res.send(result);
 }
