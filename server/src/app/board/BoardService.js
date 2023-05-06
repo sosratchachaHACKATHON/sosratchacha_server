@@ -51,3 +51,17 @@ exports.createComment = async function(userInfo, boardId, content){
         return errResponse(baseResponse.DB_ERROR);
     }
 }
+
+exports.getBoardDetail = async function(boardId){
+    try{
+        const connection = await pool.getConnection(async (conn) => conn);
+
+        const boardDetailResult = await boardDao.selectBoardDetail(connection, boardId);
+        connection.release();
+
+        return response(baseResponse.SUCCESS, {"contentWithComments": boardDetailResult[0], "picURL": boardDetailResult[1]});
+    }catch(error){
+        console.log(error)
+        return errResponse(baseResponse.DB_ERROR);
+    }
+}

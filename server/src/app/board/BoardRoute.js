@@ -9,4 +9,6 @@ module.exports = function(app){
     app.get('/app/board', jwt.jwtMiddleware, boardController.getBoard);
     //3. 게시판 댓글 작성하기
     app.post('/app/board/:boardId/comment', jwt.jwtMiddleware, boardController.createComment);
+    //4. 게시판 댓글, 내용 조회하기
+    app.get('/app/board/:boardId', boardController.getBoardDetail);
 }

@@ -35,8 +35,29 @@ async function insertComment(connection, userInfo, boardId, content){
     return response[0];
 }
 
+async function selectBoardDetail(connection, boardId){
+    const commentQuery = `
+        SELECT B.createdAt, B.xCoord, B.yCoord, B.locationName, B.type, B.content AS boardContent, text AS comment, nickname AS writerNickname
+        FROM Board B
+        INNER JOIN BoardComment BC ON B.id = BC.boardID
+        Inner JOIN user U on U.id = BC.userId
+        WHERE B.id = ?
+        ORDER BY createdAt DESC;
+    `
+    const commentQueryResponse = await connection.query(commentQuery, boardId);
+
+    const boardPicQuery = `
+        SELECT PU.url
+        FROM PicURL PU
+        WHERE PU.boardId = ?;
+    `
+    const boardPicQueryResponse = await connection.query(boardPicQuery, boardId);
+
+    return [commentQueryResponse[0], boardPicQueryResponse[0]];
+}
 module.exports = {
     insertBoard,
     selectBoard,
-    insertComment
+    insertComment,
+    selectBoardDetail
 }

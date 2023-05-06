@@ -58,3 +58,13 @@ exports.createComment = async function(req, res){
     const createCommentResponse = await BoardService.createComment(userInfo, boardId, content);
     return res.send(createCommentResponse)
 }
+
+exports.getBoardDetail = async function(req, res){
+    const {boardId} = req.params;
+    if(!boardId){
+        return res.send(errResponse(baseResponse.BOARDID_EMPTY))
+    }
+
+    const getBoardDetailResponse = await BoardService.getBoardDetail(boardId);
+    return res.send(getBoardDetailResponse)
+}
