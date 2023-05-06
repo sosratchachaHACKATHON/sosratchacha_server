@@ -33,7 +33,6 @@ exports.createBoard = async function(req, res){
 }
 
 exports.getBoard = async function(req, res){
-    const userInfo = req.verifiedToken;
     const {boardType} = req.query;
     if(!boardType){
         return res.send(errResponse(baseResponse.BOARDTYPE_EMPTY))
