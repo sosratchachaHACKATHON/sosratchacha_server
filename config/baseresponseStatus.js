@@ -25,6 +25,11 @@ module.exports = {
     BOARDTYPE_ERROR: {"isSuccess": false, "code": 4015, "message":"게시판 타입을 확인해주세요. throw or lost만 가능합니다."},
     BOARDID_EMPTY: {"isSuccess": false, "code": 4016, "message":"게시판 id를 입력해주세요."},
     
-   //500번대 에러 - 서버 오류
+    ITEMTYPE_EMPTY: {"isSuccess": false, "code": 4017, "message":"아이템 타입을 입력해주세요."},
+    PICTURE_EMPTY: {"isSuccess": false, "code": 4018, "message":"사진을 입력해주세요."},
+    ITEMTYPE_ERROR: {"isSuccess": false, "code": 4019, "message":"아이템 타입을 확인해주세요. 간식, 의류만 가능합니다."},
+    ITEMID_EMPTY: {"isSuccess": false, "code": 4020, "message":"아이템 id를 입력해주세요."},
+    
+    //500번대 에러 - 서버 오류
     DB_ERROR : {"isSuccess": false, "code": 5000, "message":"데이터베이스 오류입니다."}
 }

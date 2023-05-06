@@ -20,6 +20,7 @@ module.exports = function () {
     require('../server/src/app/Base/BaseRoute/BaseRoute')(app);
     require('../server/src/app/User/UserRoute')(app);
     require('../server/src/app/board/BoardRoute')(app);
+    require('../server/src/app/item/ItemRoute')(app);
 
     return app;
 };
