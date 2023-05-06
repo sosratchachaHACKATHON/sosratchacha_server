@@ -59,7 +59,7 @@ exports.getBoardDetail = async function(boardId){
         const boardDetailResult = await boardDao.selectBoardDetail(connection, boardId);
         connection.release();
 
-        return response(baseResponse.SUCCESS, {"contentWithComments": boardDetailResult[0], "picURL": boardDetailResult[1]});
+        return response(baseResponse.SUCCESS, {"content": boardDetailResult[0], "comments": boardDetailResult[1], "picURL": boardDetailResult[2]});
     }catch(error){
         console.log(error)
         return errResponse(baseResponse.DB_ERROR);

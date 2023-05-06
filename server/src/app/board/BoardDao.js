@@ -36,13 +36,20 @@ async function insertComment(connection, userInfo, boardId, content){
 }
 
 async function selectBoardDetail(connection, boardId){
+    const detailQuery = `
+        SELECT B.createdAt, B.xCoord, B.yCoord, B.locationName, B.type, B.content AS boardContent, B.boardType
+        FROM Board B
+        WHERE B.id = ?
+        ORDER BY createdAt DESC;
+    `
+    const detailQueryResponse = await connection.query(detailQuery, boardId);
     const commentQuery = `
-        SELECT B.createdAt, B.xCoord, B.yCoord, B.locationName, B.type, B.content AS boardContent, text AS comment, nickname AS writerNickname
+        SELECT BC.text AS comment, nickname AS writerNickname
         FROM Board B
         INNER JOIN BoardComment BC ON B.id = BC.boardID
         Inner JOIN user U on U.id = BC.userId
         WHERE B.id = ?
-        ORDER BY createdAt DESC;
+        ORDER BY BC.createdAt ASC;
     `
     const commentQueryResponse = await connection.query(commentQuery, boardId);
 
@@ -53,7 +60,7 @@ async function selectBoardDetail(connection, boardId){
     `
     const boardPicQueryResponse = await connection.query(boardPicQuery, boardId);
 
-    return [commentQueryResponse[0], boardPicQueryResponse[0]];
+    return [detailQueryResponse[0], commentQueryResponse[0], boardPicQueryResponse[0]];
 }
 module.exports = {
     insertBoard,
