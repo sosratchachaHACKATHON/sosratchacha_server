@@ -21,6 +21,7 @@ module.exports = function () {
     require('../server/src/app/User/UserRoute')(app);
     require('../server/src/app/board/BoardRoute')(app);
     require('../server/src/app/item/ItemRoute')(app);
+    require('../server/src/app/Chatting/ChattingRoute')(app);
 
     return app;
 };

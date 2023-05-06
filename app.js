@@ -9,7 +9,7 @@ var app = express();
 // 정적 파일 불러오기
 app.use(expressForStatic.static(path.join(__dirname + "/build")));
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + "/build/index.html"));
 })
 
