@@ -29,6 +29,8 @@ module.exports = {
     PICTURE_EMPTY: {"isSuccess": false, "code": 4018, "message":"사진을 입력해주세요."},
     ITEMTYPE_ERROR: {"isSuccess": false, "code": 4019, "message":"아이템 타입을 확인해주세요. 간식, 의류만 가능합니다."},
     ITEMID_EMPTY: {"isSuccess": false, "code": 4020, "message":"아이템 id를 입력해주세요."},
+    
+    SIGNUP_REDUNDANT_EMAIL: {"isSuccess": false, "code": 4021, "message":"중복된 이메일입니다."},
 
     MESSAGE_EMPTY: {"isSuccess": false, "code": 4021, "message":"메세지를 입력해주세요."},
     

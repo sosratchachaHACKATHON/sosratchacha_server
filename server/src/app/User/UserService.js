@@ -16,7 +16,11 @@ exports.createUser = async function(name, email, nickname, password){
             
         const result = await UserDao.createUser(connection, name, email, nickname, hashed);
         connection.release();
-        return response(baseResponse.SUCCESS);
+        if(result == false) return errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL);
+        else{
+            return response(baseResponse.SUCCESS);
+        }
+        
     }catch(error){
         console.log(error)
         return errResponse(baseResponse.DB_ERROR);

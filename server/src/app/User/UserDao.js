@@ -1,6 +1,13 @@
-const users=[];
-
 async function createUser(connection, name, email, nickname, password){
+    const checkQuery = `
+        SELECT email FROM user WHERE email = ?
+    `
+    const checkRow = await connection.query(checkQuery, email);
+
+    if(checkRow[0].length == 1){
+        return false;
+    }
+
     const query = `
         INSERT INTO user(name, email, nickname, password)  VALUES (?, ?, ?, ?)
     `;
