@@ -19,6 +19,7 @@ async function selectBoard(connection, userInfo, boardType){
         FROM Board B
         INNER JOIN PicURL PU on B.id = PU.boardID
         WHERE Boardtype = ?
+        ORDER BY B.id DESC;
     `
 
     const response = await connection.query(query, boardType);
