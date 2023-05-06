@@ -1,6 +1,6 @@
 const ItemService = require('./ItemService');
 const {response, errResponse} = require('../../../../config/response')
-const sellResponse = require('../../../../config/baseresponseStatus')
+const baseResponse = require('../../../../config/baseresponseStatus')
 
 
 exports.createItem=async function(req,res){

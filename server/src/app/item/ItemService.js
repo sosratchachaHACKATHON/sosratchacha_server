@@ -28,11 +28,12 @@ exports.getItem = async function(userInfo, itemType){
     try{
         const connection = await pool.getConnection(async (conn) => conn);
 
-        const itemReadResult = await itemDao.selectBoard(connection, userInfo, itemType);
+        const itemReadResult = await itemDao.selectItem (connection, userInfo, itemType);
         connection.release();
 
         return response(baseResponse.SUCCESS, itemReadResult);
     }catch(error){
+        console.log(error)
         return errResponse(baseResponse.DB_ERROR);
     }
 }
