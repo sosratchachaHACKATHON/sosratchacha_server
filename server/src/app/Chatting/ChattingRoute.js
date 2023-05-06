@@ -5,4 +5,7 @@ module.exports = function(app){
 
     //1. 채팅 업로드
     app.post('/app/chatting', jwt.jwtMiddleware, chattingController.createChatting);
+
+    //2. 채팅 조회
+    app.get('/app/chatting', jwt.jwtMiddleware, chattingController.getChatting);
 }

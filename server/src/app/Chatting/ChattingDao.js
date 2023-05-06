@@ -1,5 +1,3 @@
-
-
 async function insertChatting(connection, userId, message){
     const insertChattingQuery = `
         INSERT CHATTING (userId, content) VALUES (?, ?);
@@ -9,6 +7,18 @@ async function insertChatting(connection, userId, message){
     return insertChattingRows;
 }
 
+async function selectChatting(connection, userId, userNicname){
+    const selectChattingQuery = `
+        SELECT CT.id as chattingId, createdAt, u.nickname, content
+        FROM CHATTING CT
+        INNER JOIN user u on u.id = CT.userId
+        ORDER BY CT.createdAt DESC;
+    `
+    const [selectChattingRows] = await connection.query(selectChattingQuery);
+    return selectChattingRows;
+}
+
 module.exports = {
-    insertChatting
+    insertChatting,
+    selectChatting
 }

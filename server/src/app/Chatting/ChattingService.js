@@ -16,3 +16,20 @@ exports.createChatting = async function(userId, message){
         return errResponse(baseResponse.DB_ERROR);
     }
 }
+
+exports.getChatting = async function(userId, userNicname){
+    try{
+        const connection = await pool.getConnection(async (conn) => conn);
+
+        const chattingResult = await chattingDao.selectChatting(connection, userId, userNicname);
+
+        connection.release();
+        return response(baseResponse.SUCCESS,{
+            "myNickname": userNicname,
+            "chattingList": chattingResult
+        });
+    } catch(error){
+        console.log(error)
+        return errResponse(baseResponse.DB_ERROR);
+    }
+}
