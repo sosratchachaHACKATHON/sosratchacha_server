@@ -21,6 +21,7 @@ jobs:
           port: ${{ secrets.AWS_SSH_PORT }}
           script: |
             cd sosratchacha_server/
+            sudo npm install long
             sudo git reset --hard origin/main
             sudo git pull origin main
             sudo npm install
