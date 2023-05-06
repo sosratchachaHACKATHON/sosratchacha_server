@@ -40,7 +40,7 @@ exports.getBoard = async function(req, res){
     if(boardType != 'throw' && boardType != 'lost'){
         return res.send(errResponse(baseResponse.BOARDTYPE_ERROR))
     }
-    const getBoardResponse = await BoardService.getBoard(userInfo, boardType);
+    const getBoardResponse = await BoardService.getBoard(boardType);
     return res.send(getBoardResponse)
 }
 

@@ -25,11 +25,11 @@ exports.createBoard = async function(xCoordi, yCoordi, where, type, content, boa
     }
 }
 
-exports.getBoard = async function(userInfo, boardType){
+exports.getBoard = async function(boardType){
     try{
         const connection = await pool.getConnection(async (conn) => conn);
 
-        const boardReadResult = await boardDao.selectBoard(connection, userInfo, boardType);
+        const boardReadResult = await boardDao.selectBoard(connection, boardType);
         connection.release();
 
         return response(baseResponse.SUCCESS, boardReadResult);
