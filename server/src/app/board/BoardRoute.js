@@ -7,4 +7,6 @@ module.exports = function(app){
     app.post('/app/board', imageUploader.any('image'), boardController.createBoard);
     //2. 게시판 조회하기
     app.get('/app/board', jwt.jwtMiddleware, boardController.getBoard);
+    //3. 게시판 댓글 작성하기
+    app.post('/app/board/:boardId/comment', jwt.jwtMiddleware, boardController.createComment);
 }

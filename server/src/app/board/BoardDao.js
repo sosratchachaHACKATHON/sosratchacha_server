@@ -27,7 +27,16 @@ async function selectBoard(connection, userInfo, boardType){
     return response[0];
 }
 
+async function insertComment(connection, userInfo, boardId, content){
+    const query = `
+        INSERT INTO BoardComment(boardId, userId, text) VALUES (?, ?, ?);`
+    const response = await connection.query(query, [boardId, userInfo.id, content]);
+
+    return response[0];
+}
+
 module.exports = {
     insertBoard,
-    selectBoard
+    selectBoard,
+    insertComment
 }
