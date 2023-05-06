@@ -1,49 +1,14 @@
-//var express = require('./config/express');  //이러면 양방향 통신이 안됨
-var express = require('express');
-const http = require('http');
+// node_modules의 express 패키지를 가져온다.
+var express = require('./config/express');
 const path = require('path');
-const socketio = require('socket.io');
-const formatMessage = require('./utils/messages');
-const botName = 'ChatCord BOT';
-var pathComp= require("express-static");
-const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('./server/src/app/User/UserDao');
+var expressForStatic = require("express");
 
+//app이라는 변수에 express 함수의 변환 값을 저장한다.
 var app = express();
-const server = http.createServer(app);
-const io = socketio(server);
+const port = app.listen(8000);
+// express 서버를 실행할 때 필요한 포트 정의 및 실행 시 callback 함수를 받습니다
+app.listen(port, function() {
+    console.log(`start!express server on port 8000`);
+})
 
-//먼저 connection 맺어줘야한다. emit이 보내는거고 on은 받는거다
-io.on('connection',socket =>{
-    socket.on('joinRoom',({username,room})=>{
-        const user=userJoin(socket.id,username,room);
-        socket.join(user.room);
-        socket.emit('message',formatMessage(botName,'Welcome to chatCord'));
-
-        socket.broadcast.to(user.room).emit('message',formatMessage(botName,`${user.username} has joined the chat`));
-        io.to(user.room).emit("roomUsers",{
-            room:user.room,
-            users:getRoomUsers(user.room)
-        }); 
-    });
-    
-    //Listen for chatMessage
-    socket.on("chatMessage", (msg) => {
-        const user = getCurrentUser(socket.id);
-    
-        io.to(user.room).emit("message", formatMessage(user.username, msg));
-    });
-    socket.on('disconnect',()=>{
-        const user=userLeave(socket.id);
-        if(user){
-            io.to(user.room).emit('message',formatMessage(botName,`${user.username} has left the room`));
-        }
-        io.to(user.room).emit("roomUsers",{
-            room:user.room,
-            users:getRoomUsers(user.room)
-        });        
-});
-});
-
-app.use(pathComp(__dirname+"/global"));
-const PORT = 8000;
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+module.exports = app;
